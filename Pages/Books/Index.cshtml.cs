@@ -25,7 +25,7 @@ namespace Golea_Ana_Lab2.Pages.Books
         {
             if (_context.Book != null)
             {
-                Book = await _context.Book.Include(b => b.Publisher).Include(a => a.Author).ToListAsync();
+                Book = await _context.Book.Include(b => b.Publisher).Include(b => b.Author).ToListAsync();
             }
         }
     }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Golea_Ana_Lab2.Migrations
 {
     [DbContext(typeof(Golea_Ana_Lab2Context))]
-    [Migration("20221018133732_InitialCreateAuthors")]
-    partial class InitialCreateAuthors
+    [Migration("20221018151821_CreateAuthor")]
+    partial class CreateAuthor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,9 +53,8 @@ namespace Golea_Ana_Lab2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("AuthorID")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(6,2)");
@@ -71,6 +70,8 @@ namespace Golea_Ana_Lab2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("AuthorID");
 
                     b.HasIndex("PublisherID");
 
@@ -96,11 +97,22 @@ namespace Golea_Ana_Lab2.Migrations
 
             modelBuilder.Entity("Golea_Ana_Lab2.Models.Book", b =>
                 {
+                    b.HasOne("Golea_Ana_Lab2.Models.Author", "Author")
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorID");
+
                     b.HasOne("Golea_Ana_Lab2.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherID");
 
+                    b.Navigation("Author");
+
                     b.Navigation("Publisher");
+                });
+
+            modelBuilder.Entity("Golea_Ana_Lab2.Models.Author", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("Golea_Ana_Lab2.Models.Publisher", b =>
