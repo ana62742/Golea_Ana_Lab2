@@ -26,8 +26,14 @@
                 <span asp-validation-for="Book.PublisherID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Book.AuthorID" class="control-label">Author Name</label>
-                <select asp-for="Book.AuthorID" class="form-control" asp-items="ViewBag.AuthorID">
+                <label asp-for="Book.AuthorID" class="control-label">Author Last Name</label>
+                <select asp-for="Book.AuthorID" class="form-control" asp-items="ViewBag.AuthorLastName">
+                </select>
+                <span asp-validation-for="Book.AuthorID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.AuthorID" class="control-label">Author First Name</label>
+                <select asp-for="Book.AuthorID" class="form-control" asp-items="ViewBag.AuthorFirstName">
                 </select>
                 <span asp-validation-for="Book.AuthorID" class="text-danger"></span>
             </div>

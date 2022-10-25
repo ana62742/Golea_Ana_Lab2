@@ -13,8 +13,10 @@ namespace Golea_Ana_Lab2.Models
         public decimal Price { get; set; }
         [DataType(DataType.Date)]
         public DateTime PublishingDate { get; set; }
+        [Display(Name = "Publisher")]
         public int? PublisherID { get; set; }
         public Publisher? Publisher { get; set; }
+        [Display(Name = "Author")]
         public int? AuthorID { get; set; }
         public Author? Author { get; set; }
 
