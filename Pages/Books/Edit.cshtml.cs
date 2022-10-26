@@ -42,9 +42,14 @@ namespace Golea_Ana_Lab2.Pages.Books
 
             PopulateAssignedCategoryData(_context, Book);
 
+            var authorList = _context.Author.Select(x => new
+            {
+                x.ID,
+                FullName = x.LastName + " " + x.FirstName
+            });
+
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID","PublisherName");
-            ViewData["AuthorLastName"] = new SelectList(_context.Set<Author>(), "ID", "LastName");
-            ViewData["AuthorFirstName"] = new SelectList(_context.Set<Author>(), "ID", "FirstName");
+            ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
             return Page();
         }
 
