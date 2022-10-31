@@ -30,15 +30,15 @@ namespace Golea_Ana_Lab2.Pages.Books
                 return NotFound();
             }
 
-            Book = await _context.Book.Include(b => b.Publisher).Include(b => b.BookCategories).ThenInclude(b => b.Category).AsNoTracking().FirstOrDefaultAsync(m => m.ID == id);
-
-
-            var book =  await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
-            if (book == null)
+            Book = await _context.Book
+ .Include(b => b.Publisher)
+ .Include(b => b.BookCategories).ThenInclude(b => b.Category)
+ .AsNoTracking()
+ .FirstOrDefaultAsync(m => m.ID == id);
+            if (Book == null)
             {
                 return NotFound();
             }
-            Book = book;
 
             PopulateAssignedCategoryData(_context, Book);
 
@@ -48,8 +48,13 @@ namespace Golea_Ana_Lab2.Pages.Books
                 FullName = x.LastName + " " + x.FirstName
             });
 
-            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID","PublisherName");
+            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
             ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
+
+            /*var newbook = new Book();
+            newbook.BookCategories = new List<BookCategory>();
+            PopulateAssignedCategoryData(_context, newbook);*/
+
             return Page();
         }
 
@@ -87,10 +92,6 @@ selectedCategories)
             PopulateAssignedCategoryData(_context, bookToUpdate);
             return Page();
         }
- 
-private bool BookExists(int id)
-        {
-          return _context.Book.Any(e => e.ID == id);
-        }
     }
 }
+

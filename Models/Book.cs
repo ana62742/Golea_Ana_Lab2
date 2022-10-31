@@ -10,11 +10,14 @@ namespace Golea_Ana_Lab2.Models
         [Display(Name = "Book Title")]
         public string Title { get; set; }
         [Column(TypeName = "decimal(6,2)")]
+        [Display(Name = "Book Price")]
         public decimal Price { get; set; }
         [DataType(DataType.Date)]
+        [Display(Name = "Publishing Date")]
         public DateTime PublishingDate { get; set; }
-        [Display(Name = "Publisher")]
+    
         public int? PublisherID { get; set; }
+        
         public Publisher? Publisher { get; set; }
         [Display(Name = "Author")]
         public int? AuthorID { get; set; }

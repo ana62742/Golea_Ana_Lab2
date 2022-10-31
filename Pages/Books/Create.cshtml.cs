@@ -21,13 +21,18 @@ namespace Golea_Ana_Lab2.Pages.Books
 
         public IActionResult OnGet()
         {
+            var authorList = _context.Author.Select(x => new
+            {
+                x.ID,
+                FullName = x.LastName + " " + x.FirstName
+            }
+           );
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID", "PublisherName");
-            ViewData["AuthorLastName"] = new SelectList(_context.Set<Author>(), "ID", "LastName");
-            ViewData["AuthorFirstName"] = new SelectList(_context.Set<Author>(), "ID", "FirstName");
+            ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
+            //ViewData["CategoryID"] = new SelectList(_context.Set<Category>(), "ID", "CategoryName");
             var book = new Book();
             book.BookCategories = new List<BookCategory>();
             PopulateAssignedCategoryData(_context, book);
-
 
             return Page();
         }
