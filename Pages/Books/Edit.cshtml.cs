@@ -35,6 +35,7 @@ namespace Golea_Ana_Lab2.Pages.Books
  .Include(b => b.BookCategories).ThenInclude(b => b.Category)
  .AsNoTracking()
  .FirstOrDefaultAsync(m => m.ID == id);
+
             if (Book == null)
             {
                 return NotFound();
